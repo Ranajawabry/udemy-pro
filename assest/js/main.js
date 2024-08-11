@@ -163,6 +163,55 @@ function enablePlaceholder(ele){
 
 
 
+const widget = document.querySelector('.footer-text');
+const footer = document.querySelector('#footer');
+ // Create an Intersection Observer
+const observer = new IntersectionObserver(function(entries) {
+    console.log('entries', entries)
+const entry = entries[0];
+if (entry.isIntersecting) {
+widget.style.position = 'fixed';
+widget.style.display = 'block';
+} else {
+widget.style.display = 'none';
+}
+});
+
+// Start observing the footer
+observer.observe(footer);
+
+// او طريقه تانيه بستخدام السكرول ايفينت 
+
+// const widget = document.querySelector('.footer-text');
+// const footer = document.querySelector('#footer');
+function handleScroll() {
+// Get the bounding client rectangle of the footer
+const footerRect = footer.getBoundingClientRect();
+const viewportHeight = window.innerHeight;
+console.log(viewportHeight)
+if (footerRect.top <= viewportHeight && footerRect.bottom >= 0) {
+// Footer is visible
+widget.style.position = 'fixed';
+widget.style.display = 'block';
+} else {
+// Footer is not visible, apply fixed positioning to the widget
+widget.style.display = 'none';
+}
+}
+// Attach the scroll event listener
+window.addEventListener('scroll', handleScroll);
+handleScroll();
+
+
+
+
+
+
+
+
+
+
+
 
 
  console.log( "the offsetTop of footer is : "+ document.querySelector('.footer').offsetTop)
